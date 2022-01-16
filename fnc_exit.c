@@ -17,7 +17,7 @@
 /*                                                                                       */
 /*****************************************************************************************/
 #include "fnc_exit.h"
-int fnc_st(Ttracetbl *pk_trace, unsigned short *puh_1st_adr)
+int fnc_exit(Ttracetbl *pk_trace, unsigned short *puh_1st_adr)
 {
     /*ヌルポインタチェック*/
     if(puh_1st_adr == NULL) {

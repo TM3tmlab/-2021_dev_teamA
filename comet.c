@@ -38,7 +38,7 @@ int main(int argc,char* argv[])
 	int i_comline = RESET_Z;				//コマンドライン引数の数を確保する場所
 	int i_loop = RESET_Z;					//ループに使用する
 
-	short unsigned puh_1st_adr = RESET_Z;	//仮想メモリの先頭アドレスを確保する場所
+	short unsigned *puh_1st_adr = RESET_Z;	//仮想メモリの先頭アドレスを確保する場所
 
 	char s_fname = '\0';					//実行可能ファイル名称
 	char s_comline[CAPA_PARAMETER];			//コマンドライン引数を格納する場所
@@ -83,7 +83,7 @@ int main(int argc,char* argv[])
 
 /*仮想メモリ確保関数*/
 	if (i_code == RESULT_OK){
-		puh_1st_adr = *cm_tbat();
+		puh_1st_adr = cm_tbat();
 		if(puh_1st_adr == RESET_Z){
 			i_code = ERROR_MEMORY;
 		}
@@ -91,12 +91,12 @@ int main(int argc,char* argv[])
 
 /*オブジェクトファイル展開関数*/
 	if (i_code == RESULT_OK){
-		i_code = object_open(&k_obj_ar, s_fname, &puh_1st_adr);
+		i_code = object_open(&k_obj_ar, s_fname, puh_1st_adr);
 	}
 
 /*オードモード関数*/
 	if (i_code == RESULT_OK){
-		i_code = auto_run(k_option_ar, k_obj_ar, &puh_1st_adr);
+		i_code = auto_run(k_option_ar, k_obj_ar, puh_1st_adr);
 	}
 
 /*結果表示関数*/
