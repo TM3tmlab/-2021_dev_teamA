@@ -34,19 +34,21 @@
 /********************************************************************************/
 
 #include "object_open.h"
+#include <stdio.h>
 
-int object_open(T_OBJ* k_obj_ar, char s_fname, unsigned short *puh_1st_adr){
+int object_open(T_OBJ* k_obj_ar, int argc, char* argv[], unsigned short *puh_1st_adr){
 
 	FILE* fpobj;
 	struct stat statBuf;
 	const char* pfilename;
+	unsigned short s[16];
 	
 /*引数チェック*/
-	if (s_fname == '\0' || puh_1st_adr == NULL){
+	if (argv[argc - 1] == NULL || puh_1st_adr == NULL){
 		return ERROR_NULL;
 	}
 
-	pfilename = &s_fname;
+	pfilename = argv[argc - 1];
 
 /*サイズ取得*/
 	if (stat(pfilename, &statBuf) == -1){
@@ -59,7 +61,6 @@ int object_open(T_OBJ* k_obj_ar, char s_fname, unsigned short *puh_1st_adr){
 	}
 
 /*読み込み(ヘッダ部)*/
-	T_OBJ obj;
 	int read_num;
 
 /*ファイルオープン*/
@@ -68,26 +69,29 @@ int object_open(T_OBJ* k_obj_ar, char s_fname, unsigned short *puh_1st_adr){
 	}
 	
 /*ヘッダ読み込み*/
-	read_num = fread(&obj, sizeof(char), OBJ_SIZE, fpobj);
+	read_num = fread(s, sizeof(char), OBJ_SIZE, fpobj);
 	if (read_num != OBJ_SIZE){
 		return ERROR_READ;
 	}
+	k_obj_ar->uh_obj_open = s[0];
+	k_obj_ar->uh_init_pr = s[1];
+	k_obj_ar->i_code_size = RESET_Z;
 	
 /*読み込み(オブジェクト部)*/
 	//オブジェクトサイズ計算
-	if (obj.i_code_size == 0){
-		obj.i_code_size = statBuf.st_size - OBJ_SIZE;
+	if (k_obj_ar->i_code_size == 0){
+		k_obj_ar->i_code_size = statBuf.st_size - OBJ_SIZE;
 	}
 	
 	//仮想メモリサイズとの比較
-	if ((obj.i_code_size + obj.uh_obj_open) > VMEM_MAX){
+	if ((k_obj_ar->i_code_size + k_obj_ar->uh_obj_open) > VMEM_MAX){
 		return ERROR_OVER;
 	}
 	
 	
 	//オブジェクト読み込み
-	read_num = fread((puh_1st_adr + obj.uh_obj_open), sizeof(char), obj.i_code_size, fpobj);
-	if (read_num != obj.i_code_size){
+	read_num = fread((puh_1st_adr + k_obj_ar->uh_obj_open), sizeof(char), k_obj_ar->i_code_size, fpobj);
+	if (read_num != k_obj_ar->i_code_size){
 		return ERROR_READ;
 	}
 	

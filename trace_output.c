@@ -37,63 +37,63 @@ int trace_output (Ttracetbl k_trace, int i_stepnum)
 
     /*OPR1を表示*/
     if ((k_trace.c_trace_flag & NONE_OPR1) == 0) {
-          printf("%04x", k_trace.uh_opr1);
+          printf(" %04x", k_trace.uh_opr1);
     } 
     else {
-         printf("  ");
+         printf("     ");
     }
 
     /*OPR2を表示*/
 	if((k_trace.c_trace_flag & NONE_OPR2) == 0) {
-		printf("%04x", k_trace.uh_opr2);
+		printf(" %04x", k_trace.uh_opr2);
 	}
 	else{
-		printf("  ");
+		printf("     ");
 	}
 
     /*MNEを表示*/
-	printf("%s", k_trace.ac_mne);
+	printf(" %-4s", k_trace.ac_mne);
     
 	/*Gを表示*/
-	printf("%04x", k_trace.uh_g);
+	printf(" %01x", k_trace.uh_g);
 	
     /*Iを表示*/
-	printf("%04x", k_trace.uh_i);
+	printf(" %01x", k_trace.uh_i);
     
 	/*Xを表示*/
-	printf("%04x", k_trace.uh_x);
+	printf(" %01x", k_trace.uh_x);
 	
     /*EAを表示*/
 	if((k_trace.c_trace_flag & NONE_OPR_EA) == 0) {
-		printf("%04x", k_trace.uh_ea);
+		printf(" %04x", k_trace.uh_ea);
 	}
 	else{
-		printf("  ");
+		printf("     ");
 	}
 			
     /*PRを表示*/
-	printf("%04x", k_trace.uh_pr);
+	printf(" %04x", k_trace.uh_pr);
 	
     /*GR0を表示*/
-	printf("%04x", k_trace.auh_ogr[0]);
+	printf(" %04x", k_trace.auh_ogr[0]);
 	
     /*GR1を表示*/
-	printf("%04x", k_trace.auh_ogr[1]);
+	printf(" %04x", k_trace.auh_ogr[1]);
 	
     /*GR2を表示*/
-	printf("%04x", k_trace.auh_ogr[2]);
+	printf(" %04x", k_trace.auh_ogr[2]);
 	
     /*GR3を表示*/
-	printf("%04x", k_trace.auh_ogr[3]);
+	printf(" %04x", k_trace.auh_ogr[3]);
 	
     /*GR4を表示*/
-	printf("%04x", k_trace.auh_ogr[4]);
+	printf(" %04x", k_trace.auh_ogr[4]);
 	
     /*MRを表示*/
-	printf("%04x", k_trace.uh_mr);
+	printf(" %02x", k_trace.uh_mr);
 	
     /*FRを表示*/
-	printf("%04x", k_trace.uh_fr);
+	printf(" %02x\n", k_trace.uh_fr);
 
     return RESULT_OK;
 }

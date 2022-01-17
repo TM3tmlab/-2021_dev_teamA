@@ -29,19 +29,16 @@
 #include "comet_define.h"
 #include "comet.h"
 #include "comet_table.h"
+#include <stdio.h>
 
 int main(int argc,char* argv[])
 {
 
 /*初期化と宣言*/
 	int i_code = RESULT_OK;					//戻り値を確保する場所
-	int i_comline = RESET_Z;				//コマンドライン引数の数を確保する場所
-	int i_loop = RESET_Z;					//ループに使用する
 
 	short unsigned *puh_1st_adr = RESET_Z;	//仮想メモリの先頭アドレスを確保する場所
 
-	char s_fname = '\0';					//実行可能ファイル名称
-	char s_comline[CAPA_PARAMETER];			//コマンドライン引数を格納する場所
 
 /*構造体変数初期化*/
 	//オプション用テーブル
@@ -54,31 +51,13 @@ int main(int argc,char* argv[])
 	};
 
 /*コマンドラインチェック*/
-	//argcの(仮)確保
-	i_comline = argc;
-	
-	if (i_comline <= RESET_Z || i_comline >= CAPA_COMLINE){
+	if (argc <= CAPA_PARAMETER_MIN || argc > CAPA_PARAMETER_MAX){
 		i_code = ERROR_COMLINE;
 	}
 
-/*コマンドライン引数の確保*/
-	//argv[]の確保
-	while(i_loop < i_comline - 1){
-		s_comline[i_loop] = *argv[i_loop + 1];
-		i_loop++;
-	}
-	//argcの確保
-	i_comline = i_loop;
-	if (i_code == ERROR_COMLINE){
-	return ERROR_COMLINE;
-	}
-
-	//実行可能ファイル名称確保
-	s_fname = *argv[argc];
-
 /*パラメータチェック関数*/
 	if (i_code == RESULT_OK){
-		i_code = st_pchk(&k_option_ar, i_comline, s_comline);
+		i_code = st_pchk(&k_option_ar, argc, argv);
 	}
 
 /*仮想メモリ確保関数*/
@@ -89,9 +68,10 @@ int main(int argc,char* argv[])
 		}
 	}
 
+
 /*オブジェクトファイル展開関数*/
 	if (i_code == RESULT_OK){
-		i_code = object_open(&k_obj_ar, s_fname, puh_1st_adr);
+		i_code = object_open(&k_obj_ar, argc, argv, puh_1st_adr);
 	}
 
 /*オードモード関数*/
@@ -101,7 +81,6 @@ int main(int argc,char* argv[])
 
 /*結果表示関数*/
 	end_output(i_code);
-
 	if (i_code != RESULT_OK){
 		return i_code;
 	}

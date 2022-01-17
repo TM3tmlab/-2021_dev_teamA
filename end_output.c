@@ -30,17 +30,17 @@ int end_output(int i_code){
 	int i_error[ERROR_NUM] = {RESULT_OK,ERROR_NULL,ERROR_COMLINE,ERROR_OPTION,ERROR_OPTION_N,ERROR_OPTION_S,ERROR_FILE,ERROR_MEMORY,ERROR_OPEN,ERROR_GET,ERROR_OVER};
 	char s_coment[ERROR_NUM][SIZE] = {"TRACEE NTD",
 									"ファイルが存在しませんでした",
-									"実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
-									"実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
-									"実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
-									"ステップ数は2,147,483,648未満で指定してください",
-									"実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
-									"仮想メモリの確保に失敗しました",
-									"ファイルを開くのに失敗しました",
-									"ファイルサイズの取得に失敗しました",
-									"オブジェクトコードのサイズがオーバーしています"};
+									"3実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
+									"4実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
+									"5実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
+									"6ステップ数は2,147,483,648未満で指定してください",
+									"7実行時の入力に誤りがあります。\n入力例は以下の通り\n./comet [-r] [-s n] 実行可能ファイル",
+									"8仮想メモリの確保に失敗しました",
+									"9ファイルを開くのに失敗しました",
+									"10ファイルサイズの取得に失敗しました",
+									"11オブジェクトコードのサイズがオーバーしています"};
 
-	for (i_loop = RESET_Z; i_loop <= ERROR_NUM; i_loop++){
+	for (i_loop = RESET_Z; i_loop < ERROR_NUM; i_loop++){
 		if (i_code == i_error[i_loop]){
 			printf("%s\n", s_coment[i_loop]);
 			break;

@@ -32,7 +32,7 @@ int fnc_adda(Ttracetbl* pk_trace, unsigned short *puh_1st_adr)
 	i_sum = (int)((short)*(puh_1st_adr + pk_trace->uh_ea) + (short)pk_trace->auh_ogr[pk_trace->uh_g]);
 	
 	/*計算結果をデスティネーションへ代入*/
-	pk_trace->auh_ogr[pk_trace->uh_x] = (unsigned short)i_sum;
+	pk_trace->auh_ogr[pk_trace->uh_g] = (unsigned short)i_sum;
 	
 	/*フラグの初期化*/
 	pk_trace->uh_fr = 0x0000;

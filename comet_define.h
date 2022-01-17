@@ -56,7 +56,7 @@
 #define OPCD_ST			(0x11)		/*STのOPcode*/
 #define OPCD_ADDA		(0x20)		/*ADDAのOPcode*/
 #define OPCD_SLL		(0x52)		/*SLLのOPcode*/
-#define OPCD_EXIT		(0x90)		/*EXITのOPcode*/
+#define OPCD_EXIT		(0xa0)		/*EXITのOPcode*/
 
 
 /***** 復帰値 *****/

@@ -23,6 +23,7 @@
 #include "end_output.h"
 
 /*定義*/
-#define CAPA_PARAMETER	(5)			//コマンドライン引数容量
+#define CAPA_PARAMETER_MIN	(1)			//コマンドライン引数容量最小
+#define CAPA_PARAMETER_MAX	(5)			//コマンドライン引数容量最大
 
 #endif									/*_INCLUDE_COMET_*/

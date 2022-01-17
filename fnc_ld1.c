@@ -43,7 +43,7 @@ int fnc_ld1(Ttracetbl *pk_trace, unsigned short *puh_1st_adr)
 	}
 
 	/*プログラムレジスタ更新*/
-	pk_trace->uh_pr += 2;
+	pk_trace->uh_pr += 1;
 	
 	/*正常終了*/
 	return RESULT_OK;

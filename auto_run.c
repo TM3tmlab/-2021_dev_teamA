@@ -21,6 +21,7 @@
 
 
 #include "auto_run.h"
+#include <stdio.h>
 
 int auto_run(Toption k_option_ar, T_OBJ k_obj_ar, unsigned short* puh_1st_adr)
 {
@@ -48,8 +49,7 @@ int auto_run(Toption k_option_ar, T_OBJ k_obj_ar, unsigned short* puh_1st_adr)
     }
     
     /*処理・トレースループ 最大ステップ数を超えるまで*/
-    for(i = 0; i < k_option_ar.i_step; i++) {
-    
+    for(i = 0; i < k_option_ar.i_stepnum; i++) {
         k_trace_ar.uh_adr = k_trace_ar.uh_pr;
         /*プログラムレジスタのチェック*/
         if(k_trace_ar.uh_pr > VM_MAX_SIZE){

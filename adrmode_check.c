@@ -30,7 +30,7 @@ int adrmode_check(Ttracetbl* pk_trace, unsigned short *puh_1st_adr)
 	
 		return ERROR_NULL;
 	}
-	pk_trace->uh_i = (*(puh_1st_adr + pk_trace->uh_pr) & 0x0008);  //間接アドレス指定3bit目
+	pk_trace->uh_i = (*(puh_1st_adr + pk_trace->uh_pr) & 0x0008) >> 3;  //間接アドレス指定3bit目
 	pk_trace->uh_x =(*(puh_1st_adr + pk_trace->uh_pr) & 0x0007); //インデックスアドレス指定または、R２0-2bit目
 	switch (pk_trace->uh_i) {
 	case (IDR_ON):

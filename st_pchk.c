@@ -43,45 +43,41 @@
 /********************************************************************************/
 #include "st_pchk.h"
 
-int st_pchk(Toption* k_option, int i_comline,char s_comline[])
+int st_pchk(Toption* k_option, int argc,char* argv[])
 {
 /*初期化と宣言*/
-	int i_loop = RESET_Z;						//ループに使用する
+	int i_loop = RESET_Z;						//NULLチェックのループに使用する
+	int i_count = RESET_Z;						//オプションの指定ミスを見つけるため
 	
 	k_option->i_rist = RIST_ON;					//-rリセット
 	k_option->i_step = STEP_LIMIT_OFF;			//-sリセット
 	k_option->i_stepnum = STEPNUM_Z;			//nリセット
 	
 /*NULLチェック*/
-	while (i_loop <= i_comline){
-		if (&s_comline[i_loop] == NULL){
+	while (i_loop <= argc){
+		if (&argv[i_loop] == NULL){
 			return ERROR_NULL;
 		}
 		i_loop++;
 	}
-	i_loop = RESET_Z;							//初期化
+	i_loop = RESET_O;							//オプションチェック用に初期化
 
-/*パラメータチェック*/
-	if (i_comline <= RESET_Z || i_comline >= CAPA_COMLINE){
-		return ERROR_COMLINE;
-	}
-	
 /*オプションチェック*/
-	while (i_loop <= i_comline){
+	while (i_loop < argc){
 		//-rオプション指定
-		if (&s_comline[i_loop] == OPTION_R){
+		if (strcmp(argv[i_loop],OPTION_R) == 0){
 			k_option->i_rist = RIST_OFF;
 			i_loop++;
 		}
 		//-sオプション指定
-		else if (&s_comline[i_loop] == OPTION_S){
+		else if (strcmp(argv[i_loop],OPTION_S) == 0){
 			k_option->i_step = STEP_LIMIT_ON;
 			i_loop++;
 			//次の引数の数よりも大きいまたは'-'付きのオプションであるかチェック
-			if (i_loop > i_comline || strncmp(&s_comline[i_loop],"-",1) == 0){
+			if (i_loop > argc || strncmp(argv[i_loop],"-",1) == 0){
 				return ERROR_OPTION_N;
 			} else {
-				k_option->i_stepnum = atoi(&s_comline[i_loop]);
+				k_option->i_stepnum = atoi(argv[i_loop]);
 				if (k_option->i_stepnum < RESET_Z || k_option->i_stepnum > STEPNUM_MAX){
 					return ERROR_OPTION_S;
 				}
@@ -90,7 +86,11 @@ int st_pchk(Toption* k_option, int i_comline,char s_comline[])
 		}
 		//[-r][-s n]以外のオプションを指定された場合
 		else{
-			return ERROR_OPTION;
+			if (i_count != RESET_Z){
+				return ERROR_OPTION;
+			}
+			i_count++;
+			i_loop++;
 		}
 	}
 	

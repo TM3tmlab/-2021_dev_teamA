@@ -16,22 +16,22 @@
 
 /*オプション用テーブル*/
 typedef struct{
-    short i_rist;  /*-rの有無*/
-    short i_step;  /*-sの有無*/
-    int i_stepnum;     /*ステップ数*/
+    short i_rist;					/*-rの有無*/
+    short i_step;					/*-sの有無*/
+    int i_stepnum;					/*ステップ数*/
 }Toption;
 
 /*オブジェクト用テーブル*/
 typedef struct{
-    unsigned short uh_obj_open;     /*オブジェクト展開先アドレス*/
-    unsigned short uh_init_pr;      /*実行開始アドレス(PR初期値)*/
-    int i_code_size;                /*オブジェクトコードサイズ*/
+    unsigned short uh_obj_open;		/*オブジェクト展開先アドレス*/
+    unsigned short uh_init_pr;		/*実行開始アドレス(PR初期値)*/
+    int i_code_size;				/*オブジェクトコードサイズ*/
 }T_OBJ;
 
 
 /*トレースリスト用テーブル*/
 typedef struct{
-    unsigned short uh_adr;          /*命令アドレス*/
+    unsigned short uh_adr;			/*命令アドレス*/
     unsigned short uh_opcd;         /*命令コード*/
     unsigned short uh_opr1;         /*オペランドコード1*/
     unsigned short uh_opr2;         /*オペランドコード2*/

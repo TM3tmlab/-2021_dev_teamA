@@ -20,6 +20,7 @@
 #include	"comet_define.h"
 
 /*定義*/
+#define RESET_O			(1)			//番目が./cometであるため
 #define RIST_ON			(0)			//リスト表示初期値(表示する)
 #define STEP_LIMIT_OFF	(0)			//ステップ数指定(指定なし)
 #define STEPNUM_Z		(500)		//ステップ数指定(指定なし)
@@ -32,6 +33,6 @@
 
 /*プロトタイプ宣言*/
 //起動パラメータ解読処理
-int st_pchk(Toption* k_option_ar,int i_comline,char s_comline[]);
+int st_pchk(Toption* k_option_ar,int argc,char* argv[]);
 
 #endif									/*_INCLUDE_ST_*/

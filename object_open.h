@@ -31,6 +31,6 @@
 /*戻り値*/
 
 /*プロトタイプ宣言*/
-int object_open(T_OBJ* k_obj_ar, char s_fname, unsigned short* puh_1st_adr);
+int object_open(T_OBJ* k_obj_ar, int argc, char* argv[], unsigned short* puh_1st_adr);
 
 #endif									/*_INCLUDE_OBJ_*/
